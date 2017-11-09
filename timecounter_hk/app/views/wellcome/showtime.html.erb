@@ -1,0 +1,209 @@
+
+<style type="text/css">
+#fancyClock{
+	margin:40px auto;
+	height:200px;
+	border:1px solid #111111;
+	width:600px;
+}
+.clock{
+	background-color:#252525;
+	height:200px;
+	width:200px;
+	position:relative;
+	overflow:hidden;
+	float:left;
+}
+
+.clock .rotate{
+	position:absolute;
+	width:200px;
+	height:200px;
+	top:0;
+	left:0;
+}
+
+.rotate.right{
+	display:none;
+	z-index:11;
+}
+
+.clock .bg, .clock .front{
+	width:100px;
+	height:200px;
+	background-color:#252525;
+	position:absolute;
+	top:0;
+}
+
+.clock .display{
+	position:absolute;
+	width:200px;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	z-index:20;
+	color:#F5F5F5;
+	font-size:60px;
+	text-align:center;
+	top:55px;
+	left:0;
+	
+	text-shadow:4px 4px 5px #333333;
+}
+
+
+.clock .bg.left{ left:0; }
+
+.orange .bg.left{ background:url(http://image.zhangxinxu.com/image/blog/201008/bg_orange.png) no-repeat left top; }
+.green .bg.left{ background:url(http://image.zhangxinxu.com/image/blog/201008/bg_green.png) no-repeat left top; }
+.blue .bg.left{	background:url(http://image.zhangxinxu.com/image/blog/201008/bg_blue.png) no-repeat left top; }
+
+.clock .bg.right{ left:100px; }
+
+.orange .bg.right{ background:url(http://image.zhangxinxu.com/image/blog/201008/bg_orange.png) no-repeat right top; }
+.green .bg.right{ background:url(http://image.zhangxinxu.com/image/blog/201008/bg_green.png) no-repeat right top; }
+.blue .bg.right{ background:url(http://image.zhangxinxu.com/image/blog/201008/bg_blue.png) no-repeat right top; }
+
+
+.clock .front.left{
+	left:0;
+	z-index:10;
+}
+
+</style>
+
+<body style="background:rgb(200,200,169)">
+	<h1 style="text-align:center">您好！现在是</h1>
+	<div id="fancyClock">
+	    <div class="orange clock">
+		<div class="display" id="hours">00</div>
+		<div class="front left"></div>
+		<div class="rotate left" id="orangeRotateLeft">
+		    <div class="bg left"></div>
+		 </div>
+		<div class="rotate right" id="orangeRotateRight">
+		    <div class="bg right"></div>
+		</div>
+	    </div>
+	    <div class="blue clock">
+		<div class="display" id="minuts">00</div>
+		<div class="front left"></div>
+		<div class="rotate left" id="blueRotateLeft">
+		    <div class="bg left"></div>
+		</div>
+		<div class="rotate right" id="blueRotateRight">
+		    <div class="bg right"></div>
+		</div>
+	    </div>
+	    <div class="green clock">
+		<div class="display" id="seconds">00</div>
+		<div class="front left"></div>
+		<div class="rotate left" id="greenRotateLeft">
+		    <div class="bg left"></div>
+		</div>
+		<div class="rotate right" id="greenRotateRight">
+		    <div class="bg right"></div>
+		</div>
+	    </div>
+	</div> 
+	<script type="text/javascript">
+	(function(){
+		var $ = function(id){
+			return document.getElementById(id);
+		};
+		var o = {	
+			hour: $("hours"), 
+			minu: $("minuts"), 
+			sec: $("seconds"), 
+			orgl: $("orangeRotateLeft"), 
+			orgr: $("orangeRotateRight"), 
+			bluel: $("blueRotateLeft"),
+			bluer: $("blueRotateRight"), 
+			greenl: $("greenRotateLeft"),
+			greenr: $("greenRotateRight")
+		};
+		var f = {
+			css: function(o,key){
+				return o.currentStyle? o.currentStyle[key] : document.defaultView.getComputedStyle(o,false)[key]; 	
+			},
+			zero: function(n, top){
+				n = parseInt(n, 10), top = top || "00";
+				if(n > 0){
+					if(n <= 9){
+						n = "0" + n;	
+					}
+					return String(n);
+				}else{
+					return top.toString();	
+				}
+			},
+			angle: function(v, total){
+				var scale = v / total, offsetx = 0, offsety = 0, an;
+				var angle = scale * 360;
+			
+				var m11 = Math.cos(Math.PI*2 / 360 * angle)
+				var m21 = Math.sin(Math.PI*2 / 360 * angle);
+				if(angle > 90){
+					an = angle - 90;
+				}else{
+					an = angle;	
+				}
+				offsety = offsetx = (200 - 200 * Math.sqrt(2) * Math.cos(Math.PI / 180 * Math.abs(an - 45))) / 2 ;
+				return {
+					trans: "rotate("+angle+"deg)",	
+					ie: "progid:DXImageTransform.Microsoft.Matrix(M11="+m11+",M12=-"+m21+",M21="+m21+",M22="+m11+",SizingMethod='auto expand',FilterType='nearest neighbor')",
+					offset: {
+						x: offsetx,
+						y: offsety
+					}
+				};
+			},
+			cartoon: function(l, r, v, part){
+				var total = part * 2, angleV, anglePart;
+				if(v <= part && v > 0){
+					angleV = f.angle(v, total);
+					l.style.display = "block";
+					l.style.filter = angleV.ie;
+					l.style.MozTransform = l.style.WebkitTransform = l.style.transform = angleV.trans;
+					r.style.display = "none";
+					
+					if(document.all){
+						l.style.left = angleV.offset.x + "px";
+						l.style.top = angleV.offset.y + "px";
+					}
+				}else{
+					v = Math.abs(v - part);
+					angleV = f.angle(v, total);
+					anglePart = f.angle(part, total);
+					l.style.display = "block";
+					l.style.filter = anglePart.ie;
+					l.style.MozTransform = l.style.WebkitTransform = l.style.transform = anglePart.trans;
+					r.style.display = "block";
+					r.style.filter = angleV.ie;
+					r.style.MozTransform = r.style.WebkitTransform = r.style.transform = angleV.trans;
+					if(document.all){
+						r.style.left = angleV.offset.x + "px";
+						r.style.top = angleV.offset.x + "px";
+					}
+				}
+			},
+			ui: function(){
+				var mytime = new Date();
+				var h = mytime.getHours(),  m = mytime.getMinutes(), s = mytime.getSeconds();
+				o.hour.innerHTML = f.zero(h);
+				o.minu.innerHTML = f.zero(m, 60);
+				o.sec.innerHTML = f.zero(s, 60);
+				f.cartoon(o.orgl, o.orgr, h, 12);
+				f.cartoon(o.bluel, o.bluer, m, 30);
+				f.cartoon(o.greenl, o.greenr, s, 30);
+				setTimeout(f.ui, 1000);
+			}
+		};	
+		f.ui();
+	})();
+	</script>
+	<div style="position:absolute;left:620px;">
+		<a href="/wellcome/index">点击返回主页面</a>
+	</div>
+</body>
+	
+

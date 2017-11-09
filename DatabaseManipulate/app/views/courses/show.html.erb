@@ -1,0 +1,92 @@
+<style type="text/css">
+  body{
+    background-image: url("b1.jpg");
+    background-color: rgb(199,237,233);
+  }
+  
+</style>
+<body >
+<div align="center">
+<h1>课程信息</h1>
+<br ><br >
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Course code:</strong>
+  <%= @course.course_code %>
+</p>
+
+<p>
+  <strong>Course type:</strong>
+  <%= @course.course_type %>
+</p>
+
+<p>
+  <strong>Teaching type:</strong>
+  <%= @course.teaching_type %>
+</p>
+
+<p>
+  <strong>Exam type:</strong>
+  <%= @course.exam_type %>
+</p>
+
+<p>
+  <strong>Credit:</strong>
+  <%= @course.credit %>
+</p>
+
+<p>
+  <strong>Limit num:</strong>
+  <%= @course.limit_num %>
+</p>
+
+<p>
+  <strong>Student num:</strong>
+  <%= @course.student_num %>
+</p>
+
+<p>
+  <strong>Class room:</strong>
+  <%= @course.class_room %>
+</p>
+
+<p>
+  <strong>Course time:</strong>
+  <%= @course.course_time %>
+</p>
+
+<p>
+  <strong>Course week:</strong>
+  <%= @course.course_week %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @course.course_id %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @course.created_at %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @course.updated_at %>
+</p>
+
+<p>
+  <strong>Open:</strong>
+  <%= @course.open %>
+</p>
+<br ><br >
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
+</div>
+</body>

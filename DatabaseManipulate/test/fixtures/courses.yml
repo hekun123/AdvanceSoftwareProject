@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  course_code: MyString
+  course_type: MyString
+  teaching_type: MyString
+  exam_type: MyString
+  credit: MyString
+  limit_num: 1
+  student_num: 1
+  class_room: MyString
+  course_time: MyString
+  course_week: MyString
+  course_id: 1
+  created_at: 2017-11-07 14:34:27
+  updated_at: 2017-11-07 14:34:27
+  open: false
+
+two:
+  name: MyString
+  course_code: MyString
+  course_type: MyString
+  teaching_type: MyString
+  exam_type: MyString
+  credit: MyString
+  limit_num: 1
+  student_num: 1
+  class_room: MyString
+  course_time: MyString
+  course_week: MyString
+  course_id: 1
+  created_at: 2017-11-07 14:34:27
+  updated_at: 2017-11-07 14:34:27
+  open: false

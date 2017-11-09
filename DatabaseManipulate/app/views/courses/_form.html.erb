@@ -1,0 +1,92 @@
+<%= form_with(model: course, local: true) do |form| %>
+  <% if course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% course.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :course_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_code %>
+    <%= form.text_field :course_code, id: :course_course_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_type %>
+    <%= form.text_field :course_type, id: :course_course_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :teaching_type %>
+    <%= form.text_field :teaching_type, id: :course_teaching_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :exam_type %>
+    <%= form.text_field :exam_type, id: :course_exam_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :credit %>
+    <%= form.text_field :credit, id: :course_credit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :limit_num %>
+    <%= form.number_field :limit_num, id: :course_limit_num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student_num %>
+    <%= form.number_field :student_num, id: :course_student_num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :class_room %>
+    <%= form.text_field :class_room, id: :course_class_room %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_time %>
+    <%= form.text_field :course_time, id: :course_course_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_week %>
+    <%= form.text_field :course_week, id: :course_course_week %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_id %>
+    <%= form.number_field :course_id, id: :course_course_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :created_at %>
+    <%= form.datetime_select :created_at, id: :course_created_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :updated_at %>
+    <%= form.datetime_select :updated_at, id: :course_updated_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :open %>
+    <%= form.check_box :open, id: :course_open %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

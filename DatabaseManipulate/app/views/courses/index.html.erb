@@ -1,0 +1,74 @@
+
+<style type="text/css">
+  body{
+    background-color: rgb(199,237,233);
+  }
+
+  table{width:800px;border:0;margin:100px auto 0;text-align:center;border-collapse:collapse;border-spacing:0;}
+  table th{background:#0090D7;font-weight:normal;line-height:30px;font-size:14px;color:#FFF;}
+  table tr:nth-child(odd){background:#F4F4F4;}
+  table td:nth-child(even){color:#C00;}
+  table tr:nth-child(5){background:#73B1E0;color:#FFF;}
+  table tr:hover{background:#73B1E0;color:#FFF;}
+  table td,table th{border:1px solid #EEE;}
+  table td{padding: 15px;}
+  
+</style>
+
+<body>
+<p id="notice"><%= notice %></p>
+<br >
+<h1 align="center" style="font-size: 40px;">课程编辑</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>课程名称</th>
+      <th>课程代码</th>
+      <th>课程类型</th>
+      <th>教课方式</th>
+      <th>考试方式</th>
+      <th>学分</th>
+      <th>人数上限</th>
+      <th>选课人数</th>
+      <th>课程教室</th>
+      <th>授课时间</th>
+      <th>授课周次</th>
+      <th>学时</th>
+      <th>创建于</th>
+      <th>更新于</th>
+      <th>是否开课</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.course_code %></td>
+        <td><%= course.course_type %></td>
+        <td><%= course.teaching_type %></td>
+        <td><%= course.exam_type %></td>
+        <td><%= course.credit %></td>
+        <td><%= course.limit_num %></td>
+        <td><%= course.student_num %></td>
+        <td><%= course.class_room %></td>
+        <td><%= course.course_time %></td>
+        <td><%= course.course_week %></td>
+        <td><%= course.course_id %></td>
+        <td><%= course.created_at %></td>
+        <td><%= course.updated_at %></td>
+        <td><%= course.open %></td>
+        <td><%= link_to 'Show', course %></td>
+        <td><%= link_to 'Edit', edit_course_path(course) %></td>
+        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<span style="font-size: 30px ;background-color: black;position:absolute;left: 1300px;"><%= link_to 'New Course', new_course_path %></span>
+</body>
