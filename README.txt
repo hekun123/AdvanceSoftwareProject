@@ -6,4 +6,3 @@
 （2）显示本地时间。（3）点击按钮，实现页面跳转。
 工程一所在工程目录为/timecounter_hk，在终端下切入工程路径并输入rails s启动服务，
 然后在浏览器中输入localhost:3000/wellcome/index打开工程主页面，如图所示
-![image](https://github.com/hekun123/AdvanceSoftwareProject/blob/master/screenshot/welcome1.jpg)
